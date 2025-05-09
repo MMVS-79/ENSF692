@@ -1,0 +1,3 @@
+[submodule "lectures/WhirlwindTourOgPython"]
+	path = lectures/WhirlwindTourOgPython
+	url = git@github.com:jakevdp/WhirlwindTourOfPython.git
