@@ -1,3 +1,4 @@
+#! /usr/bin/env python3
 # ENSF 692 Spring 2025
 # May 13 Lab 3
 # Exercise 3 - Solutions
