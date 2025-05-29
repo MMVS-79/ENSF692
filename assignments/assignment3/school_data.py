@@ -63,21 +63,20 @@ def get_valid_school_input():
     Raises ValueError if the input is not found in the data.
     Returns the validated school name.
     """
-    while True: # Loop until valid input is received or error is raised
-        user_input = input("Enter either the name or numerical code of a school: ").lower().title().strip()
+    user_input = input("Enter either the name or numerical code of a school: ").lower().title().strip()
 
-        # Check if input is a school name
-        if user_input in schools:
-            return user_input # Return the name directly
+    # Check if input is a school name
+    if user_input in schools:
+        return user_input # Return the name directly
 
-        # Check if input is a school code
-        elif user_input in schools_code:
-            school_name = school_code_to_name[user_input]
-            return school_name # Return the corresponding name
+    # Check if input is a school code
+    elif user_input in schools_code:
+        school_name = school_code_to_name[user_input]
+        return school_name # Return the corresponding name
 
-        # If neither name nor code is found, raise a ValueError
-        else:
-            raise ValueError("You must enter a valid school name or code.")
+    # If neither name nor code is found, raise a ValueError
+    else:
+        raise ValueError("You must enter a valid school name or code.")
 
 def main():
     print("ENSF 692 School Enrollment Statistics")
@@ -90,19 +89,66 @@ def main():
     # Prompt for user input
     try:
         selected_school_name = get_valid_school_input()
-        # print(f"Proceeding with data for: {selected_school_name}")
+        # print(f"Proceeding with data for: {selected_school_name}")  //test
+
+        # Print Stage 2 requirements here
+        print("\n***Requested School Statistics***\n")
+
+        # Get the numerical index for the selected school
+        school_idx = schools.index(selected_school_name)
+        selected_school_code = schools_code[school_idx]
+
+        print(f"School Name: {selected_school_name}, School Code: {selected_school_code}")
+
+        # Extract data for the selected school across all years and grades
+        school_data = enrollment_3d_array[:, school_idx, :] # Shape (num_years, num_grades)
+
+        # Mean enrollment for Grade 10, 11, 12 across all years
+        mean_g10 = school_data[:, grades.index(10)].mean()
+        mean_g11 = school_data[:, grades.index(11)].mean()
+        mean_g12 = school_data[:, grades.index(12)].mean()
+        print(f"Mean enrollment for grade {grades[grades.index(10)]:.0f}: {mean_g10:.0f}")
+        print(f"Mean enrollment for grade {grades[grades.index(11)]:.0f}: {mean_g11:.0f}")
+        print(f"Mean enrollment for grade {grades[grades.index(12)]:.0f}: {mean_g12:.0f}")
+
+        # Highest and Lowest enrollment for a single grade within the entire time period
+        highest_enrollment = school_data.max()
+        lowest_enrollment = school_data.min()
+        print(f"Highest enrollement for a single greade: {highest_enrollment:.0f}")
+        print(f"Lowest enrollement for a single greade: {lowest_enrollment:.0f}")
+
+        # Total enrollment for each year
+        yearly_totals = []
+        for i, year in enumerate(years):
+            total_for_year = school_data[i, :].sum() # Sum across grades for current year
+            yearly_totals.append(total_for_year)
+            print(f"Total enrollment for {year:.0f}: {total_for_year:.0f}")
+
+        # Total ten-year enrollment
+        total_ten_year_enrollment = school_data.sum() # Sum all enrollments for the school
+        print(f"Total ten-year enrollment: {total_ten_year_enrollment:.0f}")
+
+        # Mean total yearly enrollment over 10 years
+        mean_total_yearly_enrollment = np.mean(yearly_totals)
+        print(f"Mean total yearly enrollment over 10 years: {mean_total_yearly_enrollment:.0f}")
+
+        # Enrollment numbers over 500 and median of those
+        enrollments_over_500 = school_data[school_data > 500]
+
+        if enrollments_over_500.size == 0:
+            print("No enrollments over 500.")
+        else:
+            median_over_500 = np.median(enrollments_over_500)
+            print(f"Median value of enrollments > 500: {median_over_500:.0f}")
+
+        # Print Stage 3 requirements here
+        print("\n***General Statistics for All Schools***\n")     
 
     except ValueError as e:
         print(e)
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
     
-    # Print Stage 2 requirements here
-    print("\n***Requested School Statistics***\n")
-
-    # Print Stage 3 requirements here
-    print("\n***General Statistics for All Schools***\n")
-
 
 if __name__ == "__main__":
     main()
