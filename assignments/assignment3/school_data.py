@@ -142,7 +142,29 @@ def main():
             print(f"Median value of enrollments > 500: {median_over_500:.0f}")
 
         # Print Stage 3 requirements here
-        print("\n***General Statistics for All Schools***\n")     
+        print("\n***General Statistics for All Schools***\n")
+
+        year_2013_idx = years.index(2013) 
+        year_2022_idx = years.index(2022) 
+        grade_12_idx = grades.index(12)
+
+        # Mean enrollment in 2013 (across all schools and all grades for that year)
+        mean_enrollment_2013 = np.nanmean(enrollment_3d_array[year_2013_idx, :, :])
+        print(f"Mean enrollment in {years[year_2013_idx]:.0f}: {mean_enrollment_2013:.0f}")
+        # Mean enrollment in 2022 (across all schools and all grades for that year)
+        mean_enrollment_2022 = np.nanmean(enrollment_3d_array[year_2022_idx, :, :])
+        print(f"Mean enrollment in {years[year_2022_idx]:.0f}: {mean_enrollment_2022:.0f}")
+
+        # Total graduating class of 2022 across all schools (Grade 12 for 2022)
+        total_graduating_2022 = np.nansum(enrollment_3d_array[year_2022_idx, :, grade_12_idx])
+        print(f"Total graduating class of {years[year_2022_idx]:.0f} (Grade 12): {total_graduating_2022:.0f}")
+
+        # Highest enrollment for a single grade within the entire time period (across all schools)
+        highest_overall_enrollment = np.nanmax(enrollment_3d_array)
+        print(f"Highest enrollment for a single grade: {highest_overall_enrollment:.0f}")
+        # Lowest enrollment for a single grade within the entire time period (across all schools)
+        lowest_overall_enrollment = np.nanmin(enrollment_3d_array)
+        print(f"Lowest enrollment for a single grade: {lowest_overall_enrollment:.0f}")     
 
     except ValueError as e:
         print(e)
