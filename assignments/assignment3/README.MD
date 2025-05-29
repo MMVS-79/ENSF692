@@ -1,5 +1,9 @@
 # ENSF 692 Spring 2025 - Assignment 3
 
+### MANUJA SENANAYAKE
+
+![run](school_data_run.png)
+
 ## 📚 Learning Outcomes
 * Create multi-dimensional arrays using NumPy
 * Validate user input through exception handling
