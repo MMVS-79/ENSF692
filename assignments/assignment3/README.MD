@@ -1,8 +1,14 @@
 # ENSF 692 Spring 2025 - Assignment 3
 
 ### MANUJA SENANAYAKE
-
+Running using school code
 ![run](school_data_run.png)
+Runing using school name
+![run2](school_data_run_2.png)
+Running using invlaid input
+![run3](school_data_run_3.png)
+Random letter case input
+![run4](school_data_run_4.png)
 
 ## 📚 Learning Outcomes
 * Create multi-dimensional arrays using NumPy
