@@ -148,6 +148,8 @@ def main():
         year_2022_idx = years.index(2022) 
         grade_12_idx = grades.index(12)
 
+        # All the nan versions of the functions below is using masking (Nan values is are ignored)
+
         # Mean enrollment in 2013 (across all schools and all grades for that year)
         mean_enrollment_2013 = np.nanmean(enrollment_3d_array[year_2013_idx, :, :])
         print(f"Mean enrollment in {years[year_2013_idx]:.0f}: {mean_enrollment_2013:.0f}")
