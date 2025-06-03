@@ -132,7 +132,7 @@ def main():
         mean_total_yearly_enrollment = np.mean(yearly_totals)
         print(f"Mean total yearly enrollment over 10 years: {mean_total_yearly_enrollment:.0f}")
 
-        # Enrollment numbers over 500 and median of those
+        # Enrollment numbers over 500 and median of those (masking function)
         enrollments_over_500 = school_data[school_data > 500]
 
         if enrollments_over_500.size == 0:
@@ -148,7 +148,7 @@ def main():
         year_2022_idx = years.index(2022) 
         grade_12_idx = grades.index(12)
 
-        # All the nan versions of the functions below is using masking (Nan values is are ignored)
+        # All the nan versions of the functions below is using masking (Nan values are ignored)
 
         # Mean enrollment in 2013 (across all schools and all grades for that year)
         mean_enrollment_2013 = np.nanmean(enrollment_3d_array[year_2013_idx, :, :])
