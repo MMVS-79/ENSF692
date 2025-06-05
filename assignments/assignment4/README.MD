@@ -2,6 +2,9 @@
 
 ## Manuja Senanayake
 
+**Running using example screenshot input**
+![run](firstRun.png)
+
 ## 📚 Learning Outcomes
 * Manipulate and analyze data using Pandas DataFrame objects
 * Read Excel data into a DataFrame
